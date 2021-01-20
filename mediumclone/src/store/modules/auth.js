@@ -40,7 +40,6 @@ const actions = {
           context.commit('registerFailure', result.response.data.errors)
         })
     })
-    // context.commit('registerStart')
   },
 }
 
