@@ -42,6 +42,7 @@
 </template>
 
 <script>
+import {mapState} from 'vuex'
 import {actionTypes} from '@/store/modules/auth'
 import McvValidationErrors from '@/components/ValidationErrors'
 
@@ -57,12 +58,10 @@ export default {
     McvValidationErrors,
   },
   computed: {
-    isSubmitting() {
-      return this.$store.state.isSubmitting
-    },
-    validationErrors() {
-      return this.$store.state.validationErrors
-    },
+    ...mapState({
+      isSubmitting: (state) => state.auth.isSubmitting,
+      validationErrors: (state) => state.auth.validationErrors,
+    }),
   },
   methods: {
     onSubmit() {
