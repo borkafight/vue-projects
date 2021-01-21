@@ -57,13 +57,11 @@ const actions = {
       authApi
         .register(credentials)
         .then((response) => {
-          console.log(response)
-          context.commit(mutationTypes.registerSuccess, response)
+          context.commit(mutationTypes.registerSuccess, response.data.user)
           setItem('accessToken', response.data.user.token)
           resolve(response.data.user)
         })
         .catch((result) => {
-          console.log(result)
           context.commit(
             mutationTypes.registerFailure,
             result.response.data.errors
@@ -75,13 +73,11 @@ const actions = {
     console.log(context, credentials)
     return new Promise((resolve) => {
       authApi.login(credentials).then((response) => {
-        console.log(response)
-        context.commit(mutationTypes.loginSuccess)
+        context.commit(mutationTypes.loginSuccess, response.data.user)
         setItem('accessToken', response.data.user.token)
         resolve(response.data.user)
       })
     }).catch((result) => {
-      console.log(result)
       context.commit(mutationTypes.loginFailure, result.response.data.errors)
     })
   },
